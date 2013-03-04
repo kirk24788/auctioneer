@@ -1,0 +1,40 @@
+<html xmlns:wicket="http://wicket.apache.org/dtds.data/wicket-xhtml1.4-strict.dtd">
+<head> 
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
+<link type="text/css" href="/css/base.css" rel="stylesheet" />
+</head>
+<body>
+<div class="container">
+<wicket:extend>
+  <div class="left-container"> <!-- Left Container -->
+    <div class="left-title">Admin Konsole</div>
+    <div class="left-text">
+      <p>Diese Seite bietet eine Konsole zur direkten Kommunikation mit dem Backend.</p>
+    </div>
+  </div> <!-- Left Container -->
+  <div class="center-container"> <!-- Center Container -->
+  <form wicket:id="consoleForm">
+    <table class="informationTable">
+      <tbody>
+        <tr><th class="title" colspan="2" align="center">Output</th></tr>
+        <tr><td>
+        <textarea wicket:id="consoleOutput" cols="80" rows="25" disabled="true" readonly="true">
+        </textarea> 
+        </td></tr>
+        <tr><th class="title" colspan="2" align="center">Input</th></tr>
+        <tr><td>
+        <textarea wicket:id="consoleInput" cols="80" rows="8"></textarea> 
+        </td></tr>
+        <tr><td align="center"><input wicket:id="submitButton"  type="button" value="Submit"></td></tr>
+      </tbody>
+    </table>
+   </form>
+  </div> <!-- Center Container -->
+  
+  
+ 
+ 
+</wicket:extend>
+</div>
+</body>
+</html>

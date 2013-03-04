@@ -1,0 +1,36 @@
+.pagingNavigation {
+    top: 475px;
+    margin:0 auto;
+    width: 600px;
+}
+
+.pagingButton {
+    display: inline-block;
+    background-color: #FFF;
+    color: #23A4FF;
+    margin-top:10px;
+    text-align: center;
+    font-size: 1em;
+    line-height: 1.5em;
+    width: 25px;
+    height: 20px;
+    margin: 4px;
+}
+
+span.pagingJump {
+    visibility: hidden;
+}
+span.pagingNumber {
+    color: #FFF;
+    background-color: #23A4FF;
+}
+
+a.pagingButton {
+    border: 1px solid #23A4FF;
+    text-decoration: none;
+}
+a.pagingButton:hover {
+    color: #FFF;
+    background-color: #23A4FF;
+}
+

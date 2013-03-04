@@ -1,0 +1,82 @@
+<html xmlns:wicket="http://wicket.apache.org/dtds.data/wicket-xhtml1.4-strict.dtd">
+<head> 
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
+<link type="text/css" href="/css/base.css" rel="stylesheet" />  
+        <wicket:head>
+            <style>
+                div.wicket-aa {
+                    background-color:#FFF;
+                    border:1px solid #ddd;
+                    border-style: solid;
+                    font-size: 0.95em;
+                    padding: 1px;
+                    margin: 1px 0 0 0;
+                    text-align:left;
+                }
+                div.wicket-aa ul { 
+                    list-style:none; 
+                    padding: 1px;
+                    font-size: 0.95em;
+                    margin:0; 
+                }
+                div.wicket-aa ul li.selected { 
+                    color: #FFF;
+                    background-color: #23A4FF; 
+                    margin:0; 
+                }
+            </style>
+        </wicket:head>
+</head>
+<body>
+<div class="container">
+<wicket:extend>
+  <div class="left-container"> <!-- Left Container -->
+    <div class="left-title">Error Log</div>
+    <div class="left-text">
+      <p>Diese Seite listet die zuletzt aufgetretenen Fehler auf.</p>
+      <p>Die bekannten Items können dann in Price Watches benutzt werden.</p>
+      <p><span class="itemFilter"><input wicket:id="exceptionFilter" class="search" /></span></p>
+    </div>
+  </div> <!-- Left Container -->
+  <div class="center-container" wicket:id="errorLogContainer"> <!-- Center Container -->
+            <ul class="errorLogList">
+                <li wicket:id="exceptionList">
+                 <div class="errorLogLine" wicket:id="errorLogLine">
+                  <span wicket:id="time" class="exceptionTime">2012-12-31 16:58</span>
+                  <span wicket:id="message" class="exceptionMessage">Error XYZ</span>
+                  <!--
+                  <span class="exceptionTooltip">
+                    <b><span wicket:id="classname">NullPointerException</span></b>
+                    <tt><span wicket:id="stacktrace">
+Caused by: java.io.NotSerializableException: de.mancino.auctioneer.exceptions.ExceptionLog<br/>
+    at java.io.ObjectOutputStream.writeObject0(ObjectOutputStream.java:1164)<br/>
+    at java.io.ObjectOutputStream.defaultWriteFields(ObjectOutputStream.java:1518)<br/>
+    at java.io.ObjectOutputStream.writeSerialData(ObjectOutputStream.java:1483)<br/>
+    at java.io.ObjectOutputStream.writeOrdinaryObject(ObjectOutputStream.java:1400)<br/>
+    at java.io.ObjectOutputStream.writeObject0(ObjectOutputStream.java:1158)<br/>
+    at java.io.ObjectOutputStream.writeObject(ObjectOutputStream.java:330)<br/>
+                    </span></tt>
+                  </span>
+                  -->
+                 </div>
+                </li>
+            </ul>
+
+            <div wicket:id="exceptionPager" class="pagingNavigation">
+                <a href="">&lt;&lt;</a>
+                <a class="pagerPage" href="">1</a>
+                <a href="">2</a>
+                <a href="">3</a>
+                <a href="">4</a>
+                <a href="">&gt;&gt;</a>
+            </div>
+    
+  </div> <!-- Center Container -->
+  
+  
+ 
+ 
+</wicket:extend>
+</div>
+</body>
+</html>

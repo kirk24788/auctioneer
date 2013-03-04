@@ -1,0 +1,68 @@
+
+.priceWatchList li {
+  display: inline-block;
+  margin-bottom: 6px;
+}
+
+.priceWatchLine {
+    height: 24px;
+    border: 1px solid #ddd;
+    width: 550px;
+    position:relative;
+    display: inline-block;
+    cursor: pointer;
+    color: #23A4FF;
+    background-color: #FFF;
+}
+
+.priceWatchLine:hover {
+    background-color: #23A4FF;
+    color: #FFF;
+    background-color: #23A4FF;
+}
+
+.itemName {
+    font-size: 13px;
+    letter-spacing: 2px;
+    position:absolute;
+    top: 5px;
+    left: 30px;
+}
+.itemIcon {
+    position:absolute;
+    left: 1px;
+    top: 1px;
+}
+
+.priceWatchInput {
+    position: relative;
+    top: -5px;
+    width: 500px;
+}
+.priceWatchInput.componentFeedbackError {
+    background-color: #e2a1a3;
+    border: 1px solid #B30606;
+}
+
+.action {
+    height: 24px;
+    border: 1px solid #ddd;
+    width: 24px;
+    position: relative;
+    top: -9px;
+    display: inline-block;
+    cursor: pointer;
+    color: #23A4FF;
+}
+.deleteAction:hover {
+    background-color: #B30606;
+}
+
+.deleteActionIcon {
+    position: relative;
+    top: 4px;
+}
+
+.addAction:hover {
+    background-color: #28b921;
+}

@@ -1,0 +1,32 @@
+<html xmlns:wicket="http://wicket.apache.org/dtds.data/wicket-xhtml1.4-strict.dtd">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link type="text/css" href="./css/base.css" rel="stylesheet" />
+<link type="text/css" href="./css/list.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="menu-bar">
+        <ul id="menu">
+                <a wicket:id="linkToHome" href="HomePage.html"><li>Home</li></a>
+                <a wicket:id="linkToPriceWatch" href="PriceWatchPage.html"><li>PriceWatch</li></a>
+                <a wicket:id="linkToManage" href="ManagePage.html"><li>Verwalten</li></a>
+                <a wicket:id="linkToLogin" href="Login.html"><li>Login</li></a>
+                <a wicket:id="logoutLink" href="Logout.html"><li>Logout</li></a>
+        </ul>
+    </div>
+    <div class="container">
+<wicket:extend>
+  <div class="left-container"> <!-- Left Container -->
+    <div class="left-title"><span wicket:id="itemName">Item XY</span></div>
+    <div class="left-text">
+      <p>Der Price Watch gibt einen Historie des Preisverlauf bestimmter Items.</p>
+      <p>Für jedes Item werden detaillierte Statistiken der letzten 30 Tage gespeichert.</p>
+    </div>
+  </div> <!-- Left Container -->
+  <div class="center-container"> <!-- Center Container -->
+  <div id="highchart" style="height: 500px"></div>
+  </div>
+</wicket:extend>
+    </div>
+</body>
+</html>

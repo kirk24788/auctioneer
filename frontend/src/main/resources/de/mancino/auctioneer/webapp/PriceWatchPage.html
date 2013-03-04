@@ -1,0 +1,73 @@
+<html xmlns:wicket="http://wicket.apache.org/dtds.data/wicket-xhtml1.4-strict.dtd">
+<head> 
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
+<link type="text/css" href="/css/base.css" rel="stylesheet" /> 
+        <wicket:head>
+            <style>
+                div.wicket-aa {
+                    background-color:#FFF;
+                    border:1px solid #ddd;
+                    border-style: solid;
+                    font-size: 0.95em;
+                    padding: 1px;
+                    margin: 1px 0 0 0;
+                    text-align:left;
+                }
+                div.wicket-aa ul { 
+                    list-style:none; 
+                    padding: 1px;
+                    font-size: 0.95em;
+                    margin:0; 
+                }
+                div.wicket-aa ul li.selected { 
+                    color: #FFF;
+                    background-color: #23A4FF; 
+                    margin:0; 
+                }
+            </style>
+        </wicket:head>
+</head>
+<body>
+<div class="container">
+<wicket:extend>
+  <div class="left-container"> <!-- Left Container -->
+    <div class="left-title">Price Watch</div>
+    <div class="left-text">
+      <p>Der Price Watch gibt einen Historie des Preisverlauf bestimmter Items.</p>
+      <p>Für jedes Item werden detaillierte Statistiken der letzten 30 Tage gespeichert.</p>
+      <p><span class="itemFilter"><input wicket:id="itemFilter" class="search" /></span></p>
+    </div>
+  </div> <!-- Left Container -->
+  <div class="center-container"  wicket:id="priceWatchContainer"> <!-- Center Container -->
+            <ul class="priceWatchList">
+                <li wicket:id="priceWatchList">
+                 <div class="priceWatchLine" wicket:id="priceWatchLine">
+                  <img wicket:id="icon" width="22" height="22" class="itemIcon"/>
+                  <span wicket:id="name" class="itemName">Item XYZ</span>
+                 </div>
+                 <div class="action deleteAction" wicket:id="deleteAction"><img class="deleteActionIcon" wicket:id="deleteLink" src="/images/delete_16x16.png" alt="Delete"/></div>
+                </li>
+                
+                <li><form wicket:id="priceWatchAddForm">
+                 <div class="priceWatchLine">
+                  <span class="itemName"><input wicket:id="addItemName" class="priceWatchInput" /></span>
+                 </div>
+                 <div class="action addAction"><img class="deleteActionIcon" wicket:id="addLink" src="/images/add_32x32.png" width="16" height="16" alt="Delete"/></div>
+                </form>
+                </li>
+            </ul>
+
+            <div wicket:id="priceWatchPager" class="pagingNavigation">
+                <a href="">&lt;&lt;</a>
+                <a class="pagerPage" href="">1</a>
+                <a href="">2</a>
+                <a href="">3</a>
+                <a href="">4</a>
+                <a href="">&gt;&gt;</a>
+            </div>
+            
+  </div> <!-- Center Container -->
+</wicket:extend>
+</div>
+</body>
+</html>

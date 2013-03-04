@@ -1,0 +1,83 @@
+.craftingList li {
+  display: inline-block;
+  margin-bottom: 1px;
+}
+.craftingLine {
+    height: 24px;
+    border: 1px solid #ddd;
+    width: 438px;
+    position:relative;
+    display: inline-block;
+    cursor: pointer;
+    color: #23A4FF;
+    background-color: #FFF;
+}
+
+.craftingLine:hover {
+    background-color: #23A4FF;
+    color: #FFF;
+    background-color: #23A4FF;
+}
+.salePriceBox {
+    height: 24px;
+    border: 1px solid #ddd;
+    width: 100px;
+    position: relative;
+    top: 0px;
+    left: 3px;
+    display: inline-block;
+    color: #23A4FF;
+}
+
+.salePrice {
+    font-size: 13px;
+    letter-spacing: 2px;
+    position:absolute;
+    top: 5px;
+    left: 5px;
+    width: 80px;
+    text-align: right;
+}
+
+
+table.craftingTable {
+    width: 600px;
+    position:relative;
+    font-size: 12px;
+    left: 100px;
+    text-align: left;
+    border-spacing: 5px;
+    border-collapse: separate;
+    margin-bottom: 25px;
+}
+
+table.craftingTable th.title {
+    border: 1px solid #ddd;
+    font-variant: small-caps;
+    letter-spacing: 9px;
+    background-color: #23A4FF;
+    font-size: 14px;
+    color: #FFF;
+    padding: 2px;
+    padding-left: 25px;
+}
+
+table.craftingTable td.subtitle  {
+    width: 300px;
+    text-align: right;
+    padding: 2px;
+    padding-right: 20px;
+    letter-spacing: 2px;
+    border: 1px solid #ddd;
+    background-color: #eee;
+    font-variant: small-caps;
+    color: #000;
+}
+
+table.craftingTable td.value  {
+    width: 250px;
+    text-align: center;
+    padding: 2px;
+    letter-spacing: 1px;
+    border: 1px solid #ddd;
+}

@@ -1,0 +1,36 @@
+<html xmlns:wicket="http://wicket.apache.org/dtds.data/wicket-xhtml1.4-strict.dtd">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link type="text/css" href="./css/base.css" rel="stylesheet" />
+<link type="text/css" href="./css/menu.css" rel="stylesheet" />
+<link type="text/css" href="./css/paging.css" rel="stylesheet" />
+<link type="text/css" href="./css/priceWatch.css" rel="stylesheet" />
+<link type="text/css" href="./css/purchaseOrder.css" rel="stylesheet" />
+<link type="text/css" href="./css/errorLog.css" rel="stylesheet" />
+<link type="text/css" href="./css/radioButtons.css" rel="stylesheet" />
+<link type="text/css" href="./css/crafting.css" rel="stylesheet" />
+<title wicket:id="pageTitle"></title>  
+</head>
+<body>
+    <div class="menuBar">
+        <ul id="menu">
+                <span wicket:id="linkToHome" href="HomePage.html" class="menuItem"><li>Home</li></span>
+                <span wicket:id="linkToPriceWatch" href="PriceWatchPage.html" class="menuItem"><li>PriceWatch</li></span>
+                <span wicket:id="linkToBargains" href="BargainsPage.html" class="menuItem"><li>Bargains</li></span>
+                <span wicket:id="linkToCashLog" href="CashLog.html" class="menuItem"><li>Cash Log</li></span>
+                <span wicket:id="linkToCrafting" href="Crafting.html" class="menuItem"><li>Crafting</li></span>
+                <span wicket:id="linkToFarming" href="Farming.html" class="menuItem"><li>Farming</li></span>
+                <!-- span wicket:id="linkToPurchaseOrder" href="PurchaseOrderPage.html" class="menuItem"><li>PurchaseOrder</li></span -->
+                <span wicket:id="linkToItems" href="ItemPage.html" class="menuItem"><li>Items</li></span>
+                <span wicket:id="linkToManage" href="ManagePage.html" class="menuItem"><li>Verwalten</li></span>
+                <span wicket:id="linkToAdminConsole" href="AdminConsolePage.html" class="menuItem"><li>Admin Konsole</li></span>
+                <span wicket:id="linkToLogin" href="Login.html" class="menuItem"><li>Login</li></span>
+                <span wicket:id="linkToErrorLog" href="ErrorLogPage.html" class="menuItem"><li>Error Log</li></span>
+                <span wicket:id="logoutLink" href="Logout.html" class="menuItem"><li>Logout</li></span>
+        </ul>
+    </div>
+    <div class="container">
+        <wicket:child />
+    </div>
+</body>
+</html>

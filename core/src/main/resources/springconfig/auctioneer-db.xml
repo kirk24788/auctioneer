@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop" 
+    xmlns:tx="http://www.springframework.org/schema/tx" xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http: //www.springframework.org/schema/context" 
+    xsi:schemaLocation=" http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd http://www.springframework.org/schema/tx 
+    http://www.springframework.org/schema/tx/spring-tx-2.0.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd" 
+    default-autowire="byType"> -->
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+http://www.springframework.org/schema/context
+http://www.springframework.org/schema/context/spring-context-2.5.xsd">
+    <!--Bean to load properties file -->
+    <bean id="placeholderConfig" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE"/>
+        <property name="location" value="classpath:auctioneer.properties" />
+    </bean>
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="${jdbc.driver}" />
+        <property name="url" value="${jdbc.url}" />
+        <property name="username" value="${jdbc.user}" />
+        <property name="password" value="${jdbc.password}" />
+        <property name="testOnBorrow" value="true"/>
+        <property name="validationQuery" value="${jdbc.validation.query}"/>
+    </bean>
+
+    <!-- DAO's und BO's -->
+    <bean id="initDdl" class="de.mancino.auctioneer.ddl.InitDdl">
+        <constructor-arg ref="dataSource"/>
+        <constructor-arg value="${jdbc.ddl.dialect}"/>
+    </bean>
+    
+    
+    <bean id="auctioneerDatabaseDAO" class="de.mancino.auctioneer.dao.AuctioneerDatabaseDAOSpringJDBCImpl">
+        <constructor-arg value="${jdbc.database}"/>
+        <property name="dataSource" ref="dataSource" />
+    </bean>    
+    <bean id="priceWatchDAO" class="de.mancino.auctioneer.dao.PriceWatchDAOSpringJDBCImpl">
+        <constructor-arg ref="initDdl"/>
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="armoryItemDAO" class="de.mancino.auctioneer.dao.ArmoryItemDAOSpringJDBCImpl">
+        <constructor-arg ref="initDdl"/>
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="priceSampleDAO" class="de.mancino.auctioneer.dao.PriceSampleDAOSpringJDBCImpl">
+        <constructor-arg ref="initDdl"/>
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="purchaseDAO" class="de.mancino.auctioneer.dao.PurchaseDAOSpringJDBCImpl">
+        <constructor-arg ref="initDdl"/>
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="purchaseOrderDAO" class="de.mancino.auctioneer.dao.PurchaseOrderDAOSpringJDBCImpl">
+        <constructor-arg ref="initDdl"/>
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="armoryCharacterDAO" class="de.mancino.auctioneer.dao.ArmoryCharacterDAOSpringJDBCImpl">
+        <constructor-arg ref="initDdl"/>
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="cashSampleDAO" class="de.mancino.auctioneer.dao.CashSampleDAOSpringJDBCImpl">
+        <constructor-arg ref="initDdl"/>
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="saleStrategyDAO" class="de.mancino.auctioneer.dao.SaleStrategyDAOSpringJDBCImpl">
+        <constructor-arg ref="initDdl"/>
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="saleStrategyMaterialDAO" class="de.mancino.auctioneer.dao.SaleStrategyMaterialDAOSpringJDBCImpl">
+        <constructor-arg ref="initDdl"/>
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="saleStrategyMarginDAO" class="de.mancino.auctioneer.dao.SaleStrategyMarginDAOSpringJDBCImpl">
+        <constructor-arg ref="initDdl"/>
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="farmStrategyDAO" class="de.mancino.auctioneer.dao.FarmStrategyDAOSpringJDBCImpl">
+        <constructor-arg ref="initDdl"/>
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="farmStrategyLootDAO" class="de.mancino.auctioneer.dao.FarmStrategyLootDAOSpringJDBCImpl">
+        <constructor-arg ref="initDdl"/>
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="farmStrategyProfitDAO" class="de.mancino.auctioneer.dao.FarmStrategyProfitDAOSpringJDBCImpl">
+        <constructor-arg ref="initDdl"/>
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="userDAO" class="de.mancino.auctioneer.dao.UserDAOMemoryImpl">
+        <constructor-arg>
+            <bean id="userList" class="java.util.ArrayList">
+                <constructor-arg>
+                    <list>
+                        <bean class="de.mancino.auctioneer.dto.User">
+                            <property name="id" value="1" />
+                            <property name="userName" value="${auth.user.name}" />
+                            <property name="fullName" value="${auth.user.fullname}" />
+                            <property name="password" value="${auth.user.password}" />
+                            <property name="roles" value="${auth.user.roles}" />
+                        </bean>
+                        <bean class="de.mancino.auctioneer.dto.User">
+                            <property name="id" value="2" />
+                            <property name="userName" value="${auth.admin.name}" />
+                            <property name="fullName" value="${auth.admin.fullname}" />
+                            <property name="password" value="${auth.admin.password}" />
+                            <property name="roles" value="${auth.admin.roles}" />
+                        </bean>
+                    </list>
+                </constructor-arg>
+            </bean>
+        </constructor-arg>
+    </bean>
+    
+    
+    
+    <bean id="purchaseOrderBO" class="de.mancino.auctioneer.bo.PurchaseOrderBOImpl">
+        <constructor-arg ref="purchaseOrderDAO" />
+        <constructor-arg ref="purchaseDAO" />
+    </bean>
+    <bean id="priceWatchBO" class="de.mancino.auctioneer.bo.PriceWatchBOImpl">
+        <constructor-arg ref="priceWatchDAO" />
+        <constructor-arg ref="priceSampleDAO" />
+    </bean>
+    <bean id="armoryItemBO" class="de.mancino.auctioneer.bo.ArmoryItemBOImpl">
+        <constructor-arg ref="armoryItemDAO" />
+    </bean>
+    <bean id="armoryCharacterBO" class="de.mancino.auctioneer.bo.ArmoryCharacterBOImpl">
+        <constructor-arg ref="armoryCharacterDAO" />
+        <constructor-arg ref="cashSampleDAO" />
+    </bean>
+    <bean id="saleStrategyBO" class="de.mancino.auctioneer.bo.SaleStrategyBOImpl">
+        <constructor-arg ref="saleStrategyDAO" />
+        <constructor-arg ref="saleStrategyMaterialDAO" />
+        <constructor-arg ref="saleStrategyMarginDAO" />
+        <constructor-arg ref="priceWatchBO" />
+    </bean>
+    <bean id="farmStrategyBO" class="de.mancino.auctioneer.bo.FarmStrategyBOImpl">
+        <constructor-arg ref="farmStrategyDAO" />
+        <constructor-arg ref="farmStrategyLootDAO" />
+        <constructor-arg ref="farmStrategyProfitDAO" />
+        <constructor-arg ref="priceWatchBO" />
+    </bean>
+    <bean id="userBO" class="de.mancino.auctioneer.bo.UserBOImpl">
+        <constructor-arg ref="userDAO" />
+    </bean>
+</beans>

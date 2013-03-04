@@ -1,0 +1,42 @@
+<html xmlns:wicket="http://wicket.apache.org/dtds.data/wicket-xhtml1.4-strict.dtd">
+<head> 
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
+<link type="text/css" href="/css/base.css" rel="stylesheet" /> 
+</head>
+<body>
+<div class="container">
+<wicket:extend>
+  <div class="left-container"> <!-- Left Container -->
+    <div class="left-title">Login</div>
+    <div class="left-text">
+      <p>Zum Zugriff auf die erweiterten Funktionen des <i>Auctionateer</i> wird ein Login benötigt.</p>
+      <p>Es gibt einen Gast-Zugang der lesenden Zugriff auf die momentan erfassten Daten ermöglicht.</p>
+      <p>Um neue <i>Price Watches</i> hinzuzufügen oder Auktionen zu erstellen wird ein Administrator-Zugang benötigt.</p>
+    </div>
+  </div> <!-- Left Container -->
+  <div class="center-container"> <!-- Center Container -->
+    <br/>
+    
+    <br/>
+  
+        <div class="centeredInformation">
+            <br />
+            <br />
+            <br />
+            <form wicket:id="loginForm" class="">
+                <div class="centeredForm">
+                <p><span>Username: <input wicket:id="username" /></span></p>
+                <p><span>Password: <input wicket:id="password" type="password"/></span></p>
+                </div>
+                <br />
+                <br /> 
+        <input type="submit" name="submit" value="Log in" /><br/>
+            </form> 
+        
+        </div> 
+
+  </div> <!-- Center Container -->
+</wicket:extend>
+</div>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<html xmlns:wicket="http://wicket.apache.org/dtds.data/wicket-xhtml1.4-strict.dtd">
+<head> 
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
+<link type="text/css" href="/css/base.css" rel="stylesheet" />
+</head>
+<body>
+<div class="container">
+<wicket:extend>
+  <div class="left-container"> <!-- Left Container -->
+    <div class="left-title">Cash Log</div>
+    <div class="left-text">
+      <p>Anzeige des Goldes von allen eingestellen Charakteren am <span wicket:id="date"></span>.</p>
+    </div>
+  </div> <!-- Left Container -->
+  <div class="center-container"> <!-- Center Container -->
+    
+  <!-- tabbed navigation -->
+  <nav class="segmented-button" style="position: absolute; top: -50; left: 200">
+    <input type="radio" name="rb" value="rb-1" id="rb-1" checked="" class="active">
+    <label for="rb-1" class="first" rel="content_1">Cash</label>
+    
+    <input type="radio" name="rb" value="rb-2" id="rb-2">
+    <label for="rb-2" rel="content_2">Cash Graph</label>
+    
+    <input type="radio" name="rb" value="rb-3" id="rb-3">
+    <label for="rb-3" class="last" rel="content_3">Profit Graph</label>
+  </nav>
+  
+  <!-- content divs -->
+  <div id="content_1" class="segmented-tab-content">
+    <table class="informationTable">
+        <tr><th class="title" colspan="2">Charakter-Informationen </th></tr>
+        <tr wicket:id="cashList">
+          <td class="subtitle" wicket:id="name"></td>
+          <td class="value" wicket:id="cash"></td>
+        </tr>
+        <tr>
+          <td class="subtitle"><b>Gesamte Bots</b></td>
+          <td class="value"><b wicket:id="cashBotTotal"></b></td>
+        </tr>
+        <tr>
+          <td class="subtitle"><b>Gesamte Normale Chars</b></td>
+          <td class="value"><b wicket:id="cashNormalTotal"></b></td>
+        </tr>
+        <tr>
+          <td class="subtitle"><b>Gesamt</b></td>
+          <td class="value"><b wicket:id="cashTotal"></b></td>
+        </tr>
+    </table>
+  </div>
+  <div id="content_2"  class="segmented-tab-content">
+    <div id="cashlog_graph" style="height: 600px"></div>
+  </div>
+  <div id="content_3" class="segmented-tab-content">
+    <div id="profit_graph" style="height: 500px"></div>
+  </div>
+  
+  
+  
+
+
+
+   
+  </div> <!-- Center Container -->
+  
+  
+ 
+ 
+</wicket:extend>
+</div>
+</body>
+</html>

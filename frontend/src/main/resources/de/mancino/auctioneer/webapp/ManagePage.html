@@ -1,0 +1,49 @@
+<html xmlns:wicket="http://wicket.apache.org/dtds.data/wicket-xhtml1.4-strict.dtd">
+<head> 
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
+<link type="text/css" href="/css/base.css" rel="stylesheet" />
+</head>
+<body>
+<div class="container">
+<wicket:extend>
+  <div class="left-container"> <!-- Left Container -->
+    <div class="left-title">Verwalten</div>
+    <div class="left-text">
+      <p>Diese Seite bietet Verwaltungs-Formulare für den Auctioneer.</p>
+      <p>Es können neue Price-Watches erstellt werden. Hierbei gilt es zu beachten, dass der Name einzigartig ist - mehrfache Price-Watches für das selbe Item sind nicht möglich.</p>
+      <p>TODO: Auktionen.</p>
+    </div>
+  </div> <!-- Left Container -->
+  <div class="center-container"> <!-- Center Container -->
+    <table class="informationTable">
+        <tr><th class="title" colspan="2">Charakter-Informationen</th></tr>
+        <tr><td class="subtitle">Anzahl Charactere</td><td class="value" wicket:id="characterCount"></td></tr>
+        <tr><td class="subtitle">Verfügbares Gold</td><td class="value" wicket:id="goldAmount"></td></tr>
+    </table>
+    
+    <table class="informationTable">
+        <tr><th class="title" colspan="2">Datenbank-Informationen</th></tr>
+        <tr><td class="subtitle">Anzahl Items</td><td class="value" wicket:id="itemCount"></td></tr>
+        <tr><td class="subtitle">Anzahl PriceWatches</td><td class="value" wicket:id="priceWatchCount"></td></tr>
+        <tr><td class="subtitle">Anzahl PriceSamples</td><td class="value" wicket:id="priceSampleCount"></td></tr>
+        <tr><td class="subtitle">Anzahl CashSamples</td><td class="value" wicket:id="cashSampleCount"></td></tr>
+    </table>
+
+
+    <table class="informationTable">
+        <tr><th class="title" colspan="2">Speicher-Verbrauch</th></tr>
+        <tr wicket:id="memoryUsage">
+          <td class="subtitle" wicket:id="name"></td>
+          <td class="value" wicket:id="usage"></td>
+        </tr>
+    </table>
+   
+  </div> <!-- Center Container -->
+  
+  
+ 
+ 
+</wicket:extend>
+</div>
+</body>
+</html>

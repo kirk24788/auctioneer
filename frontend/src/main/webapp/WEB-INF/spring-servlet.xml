@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+    "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+    <!-- Mapping von URLs zu Controllern -->
+    <bean id="urlMapper" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+        <property name="mappings">
+            <props>
+                <prop key="/index.html">loginController</prop>
+                <prop key="/login">loginController</prop>
+                <prop key="/secure/index.html">priceWatchController</prop>
+                <prop key="/secure/priceSearch.html">priceSearchController</prop>
+                <prop key="/secure/priceWatchGraph.html">priceWatchGraphController</prop>
+                <prop key="/icons.png">imageResolveController</prop>
+                <prop key="/system/memoryUsage.html">memoryUsage</prop>
+            </props>
+        </property>
+     </bean>
+
+    <!-- Controller -->
+    <bean id="priceWatchController" class="de.mancino.auctioneer.servlets.controller.PriceWatchController">
+        <constructor-arg ref="priceWatchBO"/>
+    </bean>
+    <bean id="priceSearchController" class="de.mancino.auctioneer.servlets.controller.PriceSearchController">
+       <constructor-arg ref="armory" />
+    </bean>
+    <bean id="priceWatchGraphController" class="de.mancino.auctioneer.servlets.controller.PriceWatchGraphController" >
+        <constructor-arg ref="priceWatchBO"/>
+    </bean>
+    <bean id="imageResolveController" class="de.mancino.auctioneer.servlets.controller.ImageResolveController" >
+        <constructor-arg ref="priceWatchBO"/>
+        <constructor-arg ref="armory" />
+    </bean>
+    <bean id="loginController" class="de.mancino.auctioneer.servlets.controller.LoginController">
+        <constructor-arg ref="authenticationHandler" />
+    </bean>
+    <bean id="memoryUsage" class="de.mancino.auctioneer.servlets.controller.MemoryUsageController" />
+    
+    <!-- Zuordnung der Views zur Verarbeitung des ModelAndView Objects-->
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix">
+            <value>/WEB-INF/views/</value>
+        </property>
+        <property name="suffix">
+            <value>.jsp</value>
+        </property>
+    </bean>
+</beans>

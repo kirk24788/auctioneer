@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+    <groupId>de.mancino.armory</groupId>
+    <artifactId>auctioneer-pom</artifactId>
+        <version>2-SNAPSHOT</version>
+    </parent>
+    <groupId>de.mancino.armory</groupId>
+    <artifactId>auctioneer-core</artifactId>
+    <packaging>jar</packaging>
+    <version>2-SNAPSHOT</version>
+    <name>Auctioneer-Core</name>
+    <url>http://www.mancino-net.de</url>
+    <description>
+    </description>
+    <inceptionYear>2010</inceptionYear>
+    <developers>
+        <developer>
+            <id>mmancino</id>
+            <name>Mario Mancino</name>
+            <email>mario@mancino-net.de</email>
+            <url>http://www.mancino-net.de</url>
+            <timezone>1</timezone>
+        </developer>
+    </developers>
+</project>

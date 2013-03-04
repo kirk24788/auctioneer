@@ -1,0 +1,51 @@
+
+.errorLogList li {
+  display: inline-block;
+  margin-bottom: 6px;
+}
+
+.errorLogLine {
+    height: 24px;
+    border: 1px solid #ddd;
+    width: 550px;
+    position:relative;
+    display: inline-block;
+    cursor: pointer;
+    color: #23A4FF;
+    background-color: #FFF;
+}
+
+.errorLogLine:hover {
+    background-color: #23A4FF;
+    color: #FFF;
+    background-color: #23A4FF;
+}
+
+.exceptionMessage {
+    font-size: 10px;
+    letter-spacing: 2px;
+    position:absolute;
+    top: 6px;
+    left: 150px;
+}
+.exceptionTime {
+    font-size: 10px;
+    letter-spacing: 2px;
+    position:absolute;
+    top: 6px;
+    left: 5px;
+}
+
+.exceptionClassname {
+    font-size: 8px;
+    font-family: Courier New, monospace;
+    font-weight:bold;
+}
+.exceptionStacktrace {
+    font-size: 8px;
+    font-family: Courier New, monospace;
+}
+
+.exceptionTooltip span.exceptionTooltip{display:none;}
+.exceptionTooltip:hover span.exceptionTooltip{display:block;position:absolute; width:640px; height:480px;
+    font-size: 8px;}

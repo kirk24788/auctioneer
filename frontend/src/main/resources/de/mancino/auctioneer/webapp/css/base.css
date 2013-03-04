@@ -1,0 +1,157 @@
+html, body {
+    margin:0;
+    padding:0;
+    font-family: "Lucida Grande", Verdana;
+    font-size: 0.9em;
+    text-align: center;
+    background-color:#F2F2F2;
+}
+
+
+a {
+    color:#23A4FF;
+}
+
+.login-info {
+    width: 200px;
+    height: 50px;
+    right: 10px;
+    top: 10px;
+    margin:0 auto;
+    position:absolute;
+    padding-right: 10px;
+    background-color:#fff;
+    border:1px solid #ddd;
+}
+
+.centeredInformation {
+    position: relative;
+    text-align: center;
+}
+.centeredForm {
+    width: 500px;
+    text-align: right;
+}
+
+.container {
+    width: 1000px;
+    height: 700px;
+    margin:0 auto;
+    margin-top:10px;
+    position:relative;
+    background-color:#fff;
+    border:1px solid #ddd;
+}
+
+.left-container, 
+.right-container, 
+.center-container {
+    height:700px;
+    position:absolute;
+    top:0;
+    color:#000000;
+}
+
+.left-container {
+    width:200px;
+    left:0;
+    text-align: left;
+    overflow: auto;
+}
+
+.right-container {
+    width:100px;
+    right:0;
+    align: center;
+    text-align: left;
+    overflow: auto;
+}
+
+.center-container {
+    width:800px;
+    left:200px;
+    margin-top: 56px;
+}
+
+.left-title {
+    display: inline-block;
+    margin: 20px;
+    font-size: 16px;
+    text-decoration: none;
+    font-weight: bold;
+    color: #23A4FF;
+    letter-spacing: 2px;
+}
+
+.left-text {
+    margin: 7px;
+    text-align: justify;
+}
+
+.informationList li {
+  display: inline-block;
+  margin-bottom: 6px;
+}
+
+table.informationTable {
+    width: 600px;
+    position:relative;
+    font-size: 12px;
+    left: 100px;
+    text-align: left;
+    border-spacing: 5px;
+    border-collapse: separate;
+    margin-bottom: 25px;
+}
+
+table.informationTable th.title {
+    border: 1px solid #ddd;
+    font-variant: small-caps;
+    letter-spacing: 9px;
+    background-color: #23A4FF;
+    font-size: 14px;
+    color: #FFF;
+    padding: 2px;
+    padding-left: 25px;
+}
+
+table.informationTable td.subtitle  {
+    width: 300px;
+    text-align: right;
+    padding: 2px;
+    padding-right: 20px;
+    letter-spacing: 2px;
+    border: 1px solid #ddd;
+    background-color: #eee;
+    font-variant: small-caps;
+    color: #000;
+}
+
+table.informationTable td.value  {
+    width: 250px;
+    text-align: center;
+    padding: 2px;
+    letter-spacing: 1px;
+    border: 1px solid #ddd;
+}
+
+.search {
+    background: url(../images/search.png) no-repeat 5px 3px #fcfcfc;
+    border: 1px solid #d1d1d1;
+    font: 12px Arial,Helvetica,Sans-serif;
+    color: #333;
+    width: 185px;
+    padding: 3px 5px 3px 25px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    text-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15) inset;
+    -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15) inset;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15) inset;
+    -webkit-transition: all 0.7s ease 0s;
+    -moz-transition: all 0.7s ease 0s;
+    -o-transition: all 0.7s ease 0s;
+    transition: all 0.7s ease 0s;
+    }
+}

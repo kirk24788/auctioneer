@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop" 
+    xmlns:tx="http://www.springframework.org/schema/tx" xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http: //www.springframework.org/schema/context" 
+    xsi:schemaLocation=" http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd http://www.springframework.org/schema/tx 
+    http://www.springframework.org/schema/tx/spring-tx-2.0.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd" 
+    default-autowire="byType"> -->
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+http://www.springframework.org/schema/context
+http://www.springframework.org/schema/context/spring-context-2.5.xsd">
+  <!-- this bean must not be lazily initialized if the exporting is to happen -->
+  <bean id="exporter" class="org.springframework.jmx.export.MBeanExporter" lazy-init="false">
+    <property name="beans">
+      <map>
+        <entry key="Auctioneer:type=Tasks,name=UpdateCashLogTask" value-ref="updateCashLogTask"/>
+        <entry key="Auctioneer:type=Tasks,name=PriceWatchTask" value-ref="priceWatchTask"/>
+        <entry key="Auctioneer:type=Tasks,name=RemoveOldDataTask" value-ref="removeOldDataTask"/>
+        <entry key="Auctioneer:type=Tasks,name=UpdateSaleStrategiesTask" value-ref="updateSaleStrategiesTask"/>
+        <entry key="Auctioneer:type=Tasks,name=UpdateFarmStrategiesTask" value-ref="updateFarmStrategiesTask"/>
+        <entry key="Auctioneer:type=Tasks,name=UpdateBargainsTask" value-ref="updateBargainsTask"/>
+        <entry key="Auctioneer:type=Tasks,name=UpdateArmoryCharacterTask" value-ref="updateArmoryCharacterTask"/>
+        <entry key="Auctioneer:type=Repairs,name=RepairSaleStrategiesTask" value-ref="repairSaleStrategiesTask"/>
+      </map>
+    </property>
+  </bean>
+
+    <bean id="realmStatusDAO" class="de.mancino.auctioneer.dao.RealmStatusDAOMemoryImpl">
+    </bean>
+    <bean id="realmStatusBO" class="de.mancino.auctioneer.bo.RealmStatusBOImpl">
+        <constructor-arg ref="realmStatusDAO" />
+    </bean>
+
+    <bean id="bargainDAO" class="de.mancino.auctioneer.dao.BargainDAOMemoryImpl">
+    </bean>
+    <bean id="bargainBO" class="de.mancino.auctioneer.bo.BargainBOImpl">
+        <constructor-arg ref="bargainDAO" />
+    </bean>
+    
+    <bean id="errorLogDAO" class="de.mancino.auctioneer.dao.ErrorLogDAOMemoryImpl">
+    </bean>
+    <bean id="errorLogBO" class="de.mancino.auctioneer.bo.ErrorLogBOImpl">
+        <constructor-arg ref="errorLogDAO" />
+    </bean>
+        
+    <bean id="armory" class="de.mancino.armory.AuthenticatorArmory">
+        <constructor-arg value="${armory.user}" />
+        <constructor-arg value="${armory.password}" />
+        <constructor-arg value="${armory.char}" />
+        <constructor-arg value="${armory.realm}" />
+        <constructor-arg value="${authenticator.serial}" />
+        <constructor-arg value="${authenticator.restorationcode}" />
+    </bean>
+    <bean id="updateCashLogTask" class="de.mancino.auctioneer.tasks.UpdateCashLogTask">
+        <constructor-arg ref="armoryCharacterBO" />
+        <constructor-arg ref="armory" />
+        <constructor-arg ref="errorLogBO" />
+    </bean>
+    <bean id="updateArmoryCharacterTask" class="de.mancino.auctioneer.tasks.UpdateArmoryCharacterTask">
+        <constructor-arg ref="armoryCharacterBO" />
+        <constructor-arg ref="armory" />
+        <constructor-arg value="false" />
+        <constructor-arg ref="errorLogBO" />
+    </bean>
+    <bean id="priceWatchTask" class="de.mancino.auctioneer.tasks.UpdatePriceWatchTask">
+        <constructor-arg ref="priceWatchBO" />
+        <constructor-arg ref="armoryItemBO" />
+        <constructor-arg ref="armory" />
+        <constructor-arg ref="errorLogBO" />
+    </bean>
+    <bean id="removeOldDataTask" class="de.mancino.auctioneer.tasks.RemoveOldDataTask">
+        <constructor-arg ref="priceWatchBO" />
+        <constructor-arg ref="armoryCharacterBO" />
+        <constructor-arg ref="realmStatusBO" />
+        <constructor-arg ref="errorLogBO" />
+    </bean>
+    <bean id="updateSaleStrategiesTask" class="de.mancino.auctioneer.tasks.UpdateSaleStrategiesTask">
+        <constructor-arg ref="priceWatchBO" />
+        <constructor-arg ref="saleStrategyBO" />
+        <constructor-arg ref="errorLogBO" />
+    </bean>
+    <bean id="updateFarmStrategiesTask" class="de.mancino.auctioneer.tasks.UpdateFarmStrategiesTask">
+        <constructor-arg ref="priceWatchBO" />
+        <constructor-arg ref="farmStrategyBO" />
+        <constructor-arg ref="errorLogBO" />
+    </bean>
+    <bean id="repairSaleStrategiesTask" class="de.mancino.auctioneer.tasks.RepairSaleStrategiesTask">
+        <constructor-arg ref="priceWatchBO" />
+        <constructor-arg ref="saleStrategyBO" />
+        <constructor-arg ref="errorLogBO" />
+    </bean>
+    <bean id="updateRealmStatusTask" class="de.mancino.auctioneer.tasks.UpdateRealmStatusTask">
+        <constructor-arg ref="realmStatusBO" />
+        <constructor-arg ref="armory" />
+        <constructor-arg value="${armory.realm}" />
+        <constructor-arg ref="prowl" />
+        <constructor-arg ref="errorLogBO" />
+    </bean>
+    <bean id="updateBargainsTask" class="de.mancino.auctioneer.tasks.UpdateBargainsTask">
+        <constructor-arg ref="bargainBO" />
+        <constructor-arg ref="priceWatchBO" />
+        <constructor-arg ref="armory" />
+        <constructor-arg ref="errorLogBO" />
+    </bean>
+    
+    
+    
+    <bean id="priceWatchScheduledTask" class="org.springframework.scheduling.timer.ScheduledTimerTask">
+        <property name="delay" value="${tasks.delay.pricewatch}" />
+        <property name="period" value="${tasks.period.pricewatch}" />
+        <property name="timerTask" ref="priceWatchTask" />
+    </bean>
+    <bean id="removeOldDataSchedulerTask" class="org.springframework.scheduling.timer.ScheduledTimerTask">
+        <property name="delay" value="${tasks.delay.removeolddata}" />
+        <property name="period" value="${tasks.period.removeolddata}" />
+        <property name="timerTask" ref="removeOldDataTask" />
+    </bean>
+    <bean id="updateCashLogSchedulerTask" class="org.springframework.scheduling.timer.ScheduledTimerTask">
+        <property name="delay" value="${tasks.delay.cashlog}" />
+        <property name="period" value="${tasks.period.cashlog}" />
+        <property name="timerTask" ref="updateCashLogTask" />
+    </bean>
+    <bean id="updateArmoryCharacterSchedulerTask" class="org.springframework.scheduling.timer.ScheduledTimerTask">
+        <property name="delay" value="${tasks.delay.armorychar}" />
+        <property name="period" value="${tasks.period.armorychar}" />
+        <property name="timerTask" ref="updateArmoryCharacterTask" />
+    </bean>
+    <bean id="updateSaleStrategiesSchedulerTask" class="org.springframework.scheduling.timer.ScheduledTimerTask">
+        <property name="delay" value="${tasks.delay.salestrategies}" />
+        <property name="period" value="${tasks.period.salestrategies}" />
+        <property name="timerTask" ref="updateSaleStrategiesTask" />
+    </bean>
+    <bean id="updateFarmStrategiesSchedulerTask" class="org.springframework.scheduling.timer.ScheduledTimerTask">
+        <property name="delay" value="${tasks.delay.farmstrategies}" />
+        <property name="period" value="${tasks.period.farmstrategies}" />
+        <property name="timerTask" ref="updateFarmStrategiesTask" />
+    </bean>
+    <bean id="updateRealmStatusSchedulerTask" class="org.springframework.scheduling.timer.ScheduledTimerTask">
+        <property name="delay" value="${tasks.delay.realmstatus}" />
+        <property name="period" value="${tasks.period.realmstatus}" />
+        <property name="timerTask" ref="updateRealmStatusTask" />
+    </bean>
+    <bean id="updateBargainsSchedulerTask" class="org.springframework.scheduling.timer.ScheduledTimerTask">
+        <property name="delay" value="${tasks.delay.bargains}" />
+        <property name="period" value="${tasks.period.bargains}" />
+        <property name="timerTask" ref="updateBargainsTask" />
+    </bean>
+    
+    
+    <bean id="timerFactoryPriceWatch" class="org.springframework.scheduling.timer.TimerFactoryBean">
+        <property name="scheduledTimerTasks">
+            <list>
+                <ref bean="priceWatchScheduledTask" />
+            </list>
+        </property>
+    </bean>
+    <bean id="timerFactoryDefault" class="org.springframework.scheduling.timer.TimerFactoryBean">
+        <property name="scheduledTimerTasks">
+            <list>
+                <ref bean="removeOldDataSchedulerTask" />
+                <ref bean="updateCashLogSchedulerTask" />
+                <ref bean="updateSaleStrategiesSchedulerTask" />
+                <ref bean="updateFarmStrategiesSchedulerTask" />
+                <ref bean="updateBargainsSchedulerTask" />
+                <ref bean="updateArmoryCharacterSchedulerTask" />
+            </list>
+        </property>
+    </bean>
+    <bean id="timerFactoryRealmStatus" class="org.springframework.scheduling.timer.TimerFactoryBean">
+        <property name="scheduledTimerTasks">
+            <list>
+                <ref bean="updateRealmStatusSchedulerTask" />
+            </list>
+        </property>
+    </bean>
+    
+    <bean id="prowl" class="de.mancino.prowl.Prowl">
+        <constructor-arg value="${prowl.apikey}" />
+    </bean>
+</beans>

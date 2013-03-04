@@ -1,0 +1,32 @@
+.menuBar {
+    width: 1000px;
+    margin:0 auto;
+    margin-top:50px;
+    position:relative;
+    text-align: left;
+    left: -40px;
+    top: 8px;
+}
+
+.menuItem {
+  display: inline-block;
+  padding: 4px 4px 2px 4px;
+  border: 1px solid #ddd;
+  cursor: pointer;
+  color: #23A4FF;
+  background-color:#FFF;
+  text-decoration: none;
+}
+.menuItem li {
+  display: inline-block;
+}
+
+.menuItem:hover {
+  color:#FFF;
+  background-color: #23A4FF;
+}
+
+.menuItem.pageSelected {
+  color:#FFF;
+  background-color: #23A4FF;
+}

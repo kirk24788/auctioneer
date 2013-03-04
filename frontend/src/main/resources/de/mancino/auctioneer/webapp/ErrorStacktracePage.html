@@ -1,0 +1,53 @@
+<html xmlns:wicket="http://wicket.apache.org/dtds.data/wicket-xhtml1.4-strict.dtd">
+<head> 
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
+<link type="text/css" href="/css/base.css" rel="stylesheet" />  
+        <wicket:head>
+            <style>
+                div.wicket-aa {
+                    background-color:#FFF;
+                    border:1px solid #ddd;
+                    border-style: solid;
+                    font-size: 0.95em;
+                    padding: 1px;
+                    margin: 1px 0 0 0;
+                    text-align:left;
+                }
+                div.wicket-aa ul { 
+                    list-style:none; 
+                    padding: 1px;
+                    font-size: 0.95em;
+                    margin:0; 
+                }
+                div.wicket-aa ul li.selected { 
+                    color: #FFF;
+                    background-color: #23A4FF; 
+                    margin:0; 
+                }
+            </style>
+        </wicket:head>
+</head>
+<body>
+<div class="container">
+<wicket:extend>
+    <div class="left-title" wicket:id="exceptionName">NullpointerException</div>
+    <br/>
+    <div align="left" style="display:block;overflow:auto; width:1000px; height:650px">
+     <pre wicket:id="stackTrace">
+Caused by: java.io.NotSerializableException: de.mancino.auctioneer.exceptions.ExceptionLog<br/>
+    at java.io.ObjectOutputStream.writeObject0(ObjectOutputStream.java:1164)<br/>
+    at java.io.ObjectOutputStream.defaultWriteFields(ObjectOutputStream.java:1518)<br/>
+    at java.io.ObjectOutputStream.writeSerialData(ObjectOutputStream.java:1483)<br/>
+    at java.io.ObjectOutputStream.writeOrdinaryObject(ObjectOutputStream.java:1400)<br/>
+    at java.io.ObjectOutputStream.writeObject0(ObjectOutputStream.java:1158)<br/>
+    at java.io.ObjectOutputStream.writeObject(ObjectOutputStream.java:330)<br/>
+</pre>
+</div>
+  
+  
+ 
+ 
+</wicket:extend>
+</div>
+</body>
+</html>

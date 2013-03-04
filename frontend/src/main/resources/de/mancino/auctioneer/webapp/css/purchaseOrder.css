@@ -1,0 +1,39 @@
+.purchaseOrderForm {
+    height: 52px;
+    border: 1px solid #ddd;
+    width: 550px;
+    position:relative;
+    display: inline-block;
+    cursor: pointer;
+    color: #23A4FF;
+    background-color: #FFF;
+}
+
+.purchaseOrderForm:hover {
+    background-color: #23A4FF;
+    color: #FFF;
+    background-color: #23A4FF;
+}
+
+.purchaseOrderItemName {
+    font-size: 13px;
+    letter-spacing: 2px;
+    position: relative;
+    left: 0px;
+    width: 500px;
+}
+
+.purchaseOrderItemCount {
+    font-size: 13px;
+    letter-spacing: 2px;
+    position: relative;
+    width: 100px;
+}
+
+.purchaseOrderItemPrice {
+    font-size: 13px;
+    letter-spacing: 2px;
+    position: relative;
+    left: 5px;
+    width: 300px;
+}

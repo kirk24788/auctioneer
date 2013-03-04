@@ -1,0 +1,65 @@
+<html xmlns:wicket="http://wicket.apache.org/dtds.data/wicket-xhtml1.4-strict.dtd">
+<head> 
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
+<link type="text/css" href="/css/base.css" rel="stylesheet" /> 
+        <wicket:head>
+            <style>
+                div.wicket-aa {
+                    background-color:#FFF;
+                    border:1px solid #ddd;
+                    border-style: solid;
+                    font-size: 0.95em;
+                    padding: 1px;
+                    margin: 1px 0 0 0;
+                    text-align:left;
+                }
+                div.wicket-aa ul { 
+                    list-style:none; 
+                    padding: 1px;
+                    font-size: 0.95em;
+                    margin:0; 
+                }
+                div.wicket-aa ul li.selected { 
+                    color: #FFF;
+                    background-color: #23A4FF; 
+                    margin:0; 
+                }
+            </style>
+        </wicket:head>
+</head>
+<body>
+<div class="container">
+<wicket:extend>
+  <div class="left-container"> <!-- Left Container -->
+    <div class="left-title">Bargains</div>
+    <div class="left-text">
+      <p>Die Bargains listen Price Watches auf, bei denen einige Auktionen deutlich under dem Minimum bzw. Median der letzten Tage liegt.</p>
+      <p>Die Bargains werden nur für die aktuell vorhandenen Auktionen berechnet.</p>
+      <p><span class="itemFilter"><input wicket:id="itemFilter" class="search" /></span></p>
+    </div>
+  </div> <!-- Left Container -->
+  <div class="center-container"  wicket:id="bargainContainer"> <!-- Center Container -->
+            <ul class="priceWatchList">
+                <li wicket:id="bargainList">
+                 <div class="craftingLine" wicket:id="bargainLine">
+                  <img wicket:id="icon" width="22" height="22" class="itemIcon"/>
+                  <span wicket:id="name" class="itemName">Item XYZ</span>
+                 </div>
+                 <div class="salePriceBox"><span class="salePrice" wicket:id="profit">-12g</span></div>
+                </li>
+            </ul>
+
+            <div wicket:id="bargainPager" class="pagingNavigation">
+                <a href="">&lt;&lt;</a>
+                <a class="pagerPage" href="">1</a>
+                <a href="">2</a>
+                <a href="">3</a>
+                <a href="">4</a>
+                <a href="">&gt;&gt;</a>
+            </div>
+            
+  </div> <!-- Center Container -->
+</wicket:extend>
+</div>
+</body>
+</html>
