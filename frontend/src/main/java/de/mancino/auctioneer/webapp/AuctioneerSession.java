@@ -8,6 +8,7 @@ import org.apache.wicket.authentication.AuthenticatedWebSession;
 import org.apache.wicket.authorization.strategies.role.Roles;
 import org.apache.wicket.injection.web.InjectorHolder;
 import org.apache.wicket.spring.injection.annot.SpringBean;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import de.mancino.auctioneer.bo.UserBO;
 import de.mancino.auctioneer.dto.User;
@@ -18,7 +19,7 @@ public class AuctioneerSession extends AuthenticatedWebSession {
     /**
      * 
      */
-    private static final long serialVersionUID = 6421724381592389278L;
+    private static final long serialVersionUID = 6421724381592539978L;
 
 
     /**
@@ -31,14 +32,25 @@ public class AuctioneerSession extends AuthenticatedWebSession {
 
     protected User currentUser = null;
 
+    protected AtomicInteger lastErrors;
+
     public AuctioneerSession(final Request request) {
         super(request);
         InjectorHolder.getInjector().inject(this);
+        this.lastErrors = new AtomicInteger(0);
     }
 
 
     public static AuthenticatedWebSession get() {
         return (AuthenticatedWebSession) Session.get();
+    }
+
+    public long getLastErrors() {
+        return lastErrors.get();
+    }
+
+    public void setLastErrors(final int lastErrors) {
+        this.lastErrors.set(lastErrors);
     }
 
     public static boolean isAdmin() {

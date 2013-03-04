@@ -35,6 +35,7 @@ public class ErrorLogPage extends BasePage {
     private String exceptionFilter = "";
 
     public ErrorLogPage() {
+        clearErrors();
         final LoadableDetachableModel<List<ErrorEvent>> exceptionListModel = new LoadableDetachableModel<List<ErrorEvent>>() {
             private static final long serialVersionUID = 1L;
             @Override
