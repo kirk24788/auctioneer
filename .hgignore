@@ -1,0 +1,14 @@
+syntax:glob
+target
+log
+.classpath
+.project
+.settings
+*.orig
+
+#syntax: regexp
+#^src/main/java/Test\.java$
+
+syntax: regexp
+^bin.*
+^redeploy\.sh$
