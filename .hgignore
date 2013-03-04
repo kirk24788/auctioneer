@@ -5,6 +5,7 @@ log
 .project
 .settings
 *.orig
+core/src/main/resources/auctioneer.properties
 
 #syntax: regexp
 #^src/main/java/Test\.java$
