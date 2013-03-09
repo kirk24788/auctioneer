@@ -1,5 +1,7 @@
 package de.mancino.auctioneer.webapp;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.wicket.Request;
@@ -8,7 +10,6 @@ import org.apache.wicket.authentication.AuthenticatedWebSession;
 import org.apache.wicket.authorization.strategies.role.Roles;
 import org.apache.wicket.injection.web.InjectorHolder;
 import org.apache.wicket.spring.injection.annot.SpringBean;
-import java.util.concurrent.atomic.AtomicInteger;
 
 import de.mancino.auctioneer.bo.UserBO;
 import de.mancino.auctioneer.dto.User;
@@ -17,7 +18,7 @@ import de.mancino.auctioneer.exceptions.UserPasswordDoesntMatchException;
 
 public class AuctioneerSession extends AuthenticatedWebSession {
     /**
-     * 
+     *
      */
     private static final long serialVersionUID = 6421724381592539978L;
 
@@ -41,11 +42,11 @@ public class AuctioneerSession extends AuthenticatedWebSession {
     }
 
 
-    public static AuthenticatedWebSession get() {
-        return (AuthenticatedWebSession) Session.get();
+    public static AuctioneerSession get() {
+        return (AuctioneerSession) Session.get();
     }
 
-    public long getLastErrors() {
+    public int getLastErrors() {
         return lastErrors.get();
     }
 
@@ -81,7 +82,7 @@ public class AuctioneerSession extends AuthenticatedWebSession {
             return null;
         }
     }
-    
+
     @Override
     public void invalidate() {
         LOG.info("User '" + currentUser.getUserName() + "' logged out.");
