@@ -5,6 +5,8 @@ import javax.servlet.ServletContext;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
+import de.mancino.armory.AuthenticatorArmory;
+import de.mancino.armory.AuthenticatorVault;
 import de.mancino.auctioneer.bo.ArmoryCharacterBO;
 import de.mancino.auctioneer.bo.RealmStatusBO;
 import de.mancino.auctioneer.dao.BargainDAO;
@@ -34,5 +36,13 @@ public abstract class GenericRestService {
 
     protected ErrorLogDAO getErrorLogDAO(final ServletContext servletContext) {
         return (ErrorLogDAO) getApplicationContext(servletContext).getBean("errorLogDAO");
+    }
+
+    protected AuthenticatorVault getAuthenticatorVault(final ServletContext servletContext) {
+        return (AuthenticatorVault) getAuthenticatorArmory(servletContext).vault;
+    }
+
+    protected AuthenticatorArmory getAuthenticatorArmory(final ServletContext servletContext) {
+        return (AuthenticatorArmory) getApplicationContext(servletContext).getBean("armory");
     }
 }

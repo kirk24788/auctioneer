@@ -7,7 +7,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jboss.resteasy.util.GenericType;
 
-import de.mancino.auctioneer.dto.Bargain;
 import de.mancino.auctioneer.dto.ErrorEvent;
 import de.mancino.auctioneer.exceptions.ErrorEventDoesnNotExistException;
 
@@ -23,7 +22,7 @@ public class ErrorLogDAORestEasyImpl extends RestEasyDAOSupport implements Error
     @Override
     public ErrorEvent insert(final ErrorEvent errorEvent) {
         try {
-            return post("errorevent", errorEvent, ErrorEvent.class);
+            return post("", errorEvent, ErrorEvent.class);
         } catch (Exception e) {
             LOG.error(e.getMessage(), e);
             return null;
@@ -33,7 +32,7 @@ public class ErrorLogDAORestEasyImpl extends RestEasyDAOSupport implements Error
     @Override
     public void delete(ErrorEvent deal) {
         try {
-            delete("errorevent/"+deal.getId());
+            delete(String.valueOf(deal.getId()));
         } catch (Exception e) {
             LOG.error(e.getMessage(), e);
         }
@@ -42,7 +41,7 @@ public class ErrorLogDAORestEasyImpl extends RestEasyDAOSupport implements Error
     @Override
     public void deleteAllByMaxTimestamp(long maxTimestamp) {
         try {
-            delete("errorevents/"+maxTimestamp);
+            delete("?maxAge="+maxTimestamp);
         } catch (Exception e) {
             LOG.error(e.getMessage(), e);
         }
@@ -51,7 +50,7 @@ public class ErrorLogDAORestEasyImpl extends RestEasyDAOSupport implements Error
     @Override
     public ErrorEvent getById(int id) throws ErrorEventDoesnNotExistException {
         try {
-            return get("errorevent/"+id, ErrorEvent.class);
+            return get(String.valueOf(id), ErrorEvent.class);
         } catch (Exception e) {
             LOG.error(e.getMessage(), e);
             throw new ErrorEventDoesnNotExistException(id);
@@ -62,7 +61,7 @@ public class ErrorLogDAORestEasyImpl extends RestEasyDAOSupport implements Error
     @Override
     public List<ErrorEvent> getAll() {
         try {
-            return getAll("errorevents", new GenericType<List<ErrorEvent>>(){});
+            return getAll("", new GenericType<List<ErrorEvent>>(){});
         } catch (Exception e) {
             LOG.error(e.getMessage(), e);
             return new ArrayList<>();
@@ -71,11 +70,6 @@ public class ErrorLogDAORestEasyImpl extends RestEasyDAOSupport implements Error
 
     @Override
     public int getSize() {
-        try {
-            return getAll("bargains", new GenericType<List<Bargain>>(){}).size();
-        } catch (Exception e) {
-            LOG.error(e.getMessage(), e);
-            return 0;
-        }
+        return getAll().size();
     }
 }

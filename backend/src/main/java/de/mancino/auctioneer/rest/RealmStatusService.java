@@ -3,6 +3,7 @@ package de.mancino.auctioneer.rest;
 import javax.servlet.ServletContext;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
+import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -24,21 +25,21 @@ public class RealmStatusService extends GenericRestService {
     }
 
     @GET
-    @Path("/all")
+    @Path("/")
     @Produces("application/xml")
     public RealmStatus[] getAll(@Context ServletContext servletContext) {
         return getRealmStatusDAO(servletContext).getAll().toArray(new RealmStatus[]{});
     }
 
     @DELETE
-    @Path("/all")
-    public Response delete(@Context ServletContext servletContext, @QueryParam("maxAge") final long maxAge) {
+    @Path("/")
+    public Response delete(@Context ServletContext servletContext, @DefaultValue("0") @QueryParam("maxAge") final long maxAge) {
         getRealmStatusDAO(servletContext).deleteAllByMaxTimestamp(maxAge);
         return Response.status(200).build();
     }
 
     @POST
-    @Path("/create")
+    @Path("/")
     @Consumes("application/xml")
     public Response create(@Context ServletContext servletContext, RealmStatus realmStatus) {
         getRealmStatusDAO(servletContext).addServerStatus(realmStatus);

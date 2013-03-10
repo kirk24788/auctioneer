@@ -22,7 +22,7 @@ public class BargainDAORestEasyImpl extends RestEasyDAOSupport implements Bargai
     @Override
     public Bargain insert(final Bargain deal) {
         try {
-            return post("bargain", deal, Bargain.class);
+            return post("", deal, Bargain.class);
         } catch (Exception e) {
             LOG.error(e.getMessage(), e);
             return null;
@@ -32,7 +32,7 @@ public class BargainDAORestEasyImpl extends RestEasyDAOSupport implements Bargai
     @Override
     public void delete(Bargain deal) {
         try {
-            delete("bargain/"+deal.getId());
+            delete(String.valueOf(deal.getId()));
         } catch (Exception e) {
             LOG.error(e.getMessage(), e);
         }
@@ -41,7 +41,7 @@ public class BargainDAORestEasyImpl extends RestEasyDAOSupport implements Bargai
     @Override
     public void deleteAllByMaxTimestamp(long maxTimestamp) {
         try {
-            delete("bargains/"+maxTimestamp);
+            delete("?maxAge="+maxTimestamp);
         } catch (Exception e) {
             LOG.error(e.getMessage(), e);
         }
@@ -50,7 +50,7 @@ public class BargainDAORestEasyImpl extends RestEasyDAOSupport implements Bargai
     @Override
     public Bargain getById(int id) throws BargainDoesnNotExistException {
         try {
-            return get("bargain/"+id, Bargain.class);
+            return get(String.valueOf(id), Bargain.class);
         } catch (Exception e) {
             LOG.error(e.getMessage(), e);
             throw new BargainDoesnNotExistException(id);
@@ -61,7 +61,7 @@ public class BargainDAORestEasyImpl extends RestEasyDAOSupport implements Bargai
     @Override
     public List<Bargain> getAll() {
         try {
-            return getAll("bargains", new GenericType<List<Bargain>>(){});
+            return getAll("", new GenericType<List<Bargain>>(){});
         } catch (Exception e) {
             LOG.error(e.getMessage(), e);
             return new ArrayList<>();
@@ -70,11 +70,6 @@ public class BargainDAORestEasyImpl extends RestEasyDAOSupport implements Bargai
 
     @Override
     public int getSize() {
-        try {
-            return getAll("bargains", new GenericType<List<Bargain>>(){}).size();
-        } catch (Exception e) {
-            LOG.error(e.getMessage(), e);
-            return 0;
-        }
+        return getAll().size();
     }
 }

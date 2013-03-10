@@ -44,7 +44,7 @@ public class RealmStatusDAORestEasyImpl extends RestEasyDAOSupport implements Re
     @Override
     public List<RealmStatus> getAll() {
         try {
-            return getAll("all", new GenericType<List<RealmStatus>>(){});
+            return getAll("", new GenericType<List<RealmStatus>>(){});
         } catch (Exception e) {
             LOG.error(e.getMessage(), e);
             return new ArrayList<>();
@@ -57,7 +57,7 @@ public class RealmStatusDAORestEasyImpl extends RestEasyDAOSupport implements Re
     @Override
     public void addServerStatus(RealmStatus serverStatus) {
         try {
-            post("create", serverStatus);
+            post("", serverStatus);
         } catch (Exception e) {
             LOG.error(e.getMessage(), e);
         }
@@ -69,7 +69,7 @@ public class RealmStatusDAORestEasyImpl extends RestEasyDAOSupport implements Re
     @Override
     public void deleteAllByMaxTimestamp(long maxTimestamp) {
         try {
-            delete("all?maxAge="+maxTimestamp);
+            delete("?maxAge="+maxTimestamp);
         } catch (Exception e) {
             LOG.error(e.getMessage(), e);
         }
