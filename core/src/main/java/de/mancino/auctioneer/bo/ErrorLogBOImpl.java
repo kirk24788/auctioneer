@@ -38,6 +38,12 @@ public class ErrorLogBOImpl implements ErrorLogBO {
 
 
     @Override
+    public void remove(final long maxTimestamp) {
+        errorLogDAO.deleteAllByMaxTimestamp(maxTimestamp);
+    }
+
+
+    @Override
     public List<ErrorEvent> getAll() {
         final List<ErrorEvent> sorted = new ArrayList<>(errorLogDAO.getAll());
         Collections.sort(sorted, new Comparator<ErrorEvent>() {

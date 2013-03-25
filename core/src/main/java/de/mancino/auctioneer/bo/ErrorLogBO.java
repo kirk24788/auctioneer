@@ -11,4 +11,5 @@ public interface ErrorLogBO extends Serializable {
     public ErrorEvent getById(int id) throws ErrorEventDoesnNotExistException;
     public void removeAll();
     public List<ErrorEvent> getAll();
+    public void remove(final long maxTimestamp);
 }

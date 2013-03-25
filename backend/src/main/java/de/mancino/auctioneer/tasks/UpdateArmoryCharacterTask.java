@@ -56,20 +56,25 @@ public class UpdateArmoryCharacterTask extends AuctioneerTask {
         LOG.info("Armory Characters: {}", armoryCharacterBO.listArmoryCharacters().size());
         for(ArmoryCharacter dbCharacter : armoryCharacterBO.listArmoryCharacters()) {
             try {
-                LOG.debug("Updating Armory Character: {}", dbCharacter);
+                if(dbCharacter.getLevel()>=10) {
+                    LOG.debug("Updating Armory Character: {}", dbCharacter);
 
-                de.mancino.armory.json.api.character.Character liveCharacter = armory.api.getCharacterInfo(
-                        dbCharacter.getRealmName().toString(),
-                        dbCharacter.getCharacterName().toString());
-                boolean changed = false;
-                changed = updateAverageItemLevel(dbCharacter, liveCharacter) || changed;
-                changed = updateAverageItemLevelEquipped(dbCharacter, liveCharacter) || changed;
-                changed = updateLevel(dbCharacter, liveCharacter) || changed;
+                    de.mancino.armory.json.api.character.Character liveCharacter = armory.api.getCharacterInfo(
+                            dbCharacter.getRealmName().toString(),
+                            dbCharacter.getCharacterName().toString());
+                    boolean changed = false;
+                    changed = updateAverageItemLevel(dbCharacter, liveCharacter) || changed;
+                    changed = updateAverageItemLevelEquipped(dbCharacter, liveCharacter) || changed;
+                    changed = updateLevel(dbCharacter, liveCharacter) || changed;
 
-                if(changed) {
-                    armoryCharacterBO.updateArmoryCharacter(dbCharacter);
-                    LOG.info("Armory Character has changed: {}", dbCharacter);
+                    if(changed) {
+                        armoryCharacterBO.updateArmoryCharacter(dbCharacter);
+                        LOG.info("Armory Character has changed: {}", dbCharacter);
+                    }
+                } else {
+                    LOG.debug("Skipping Low Level ({}) Armory Character: {}", dbCharacter.getLevel(), dbCharacter);
                 }
+
             } catch (RequestException e) {
                 errorLogBO.addException(e);
                 LOG.error(e.getLocalizedMessage());
