@@ -1,5 +1,7 @@
 package de.mancino.auctioneer.exceptions;
 
+import org.apache.commons.lang.StringUtils;
+
 import de.mancino.auctioneer.aspell.token.Token;
 import de.mancino.auctioneer.aspell.token.TokenType;
 
@@ -13,5 +15,10 @@ public class InvalidTokenException extends ASpellParserException {
     public InvalidTokenException(final Token token, final String expectedData) {
         super("Invalid Token " + token.type.name() + "(" + token.data + ") at " + token.location
                 + " expected " + token.type.name() + "(" + expectedData + ")");
+    }
+
+    public InvalidTokenException(final Token token, final String ... expectedData) {
+        super("Invalid Token " + token.type.name() + "(" + token.data + ") at " + token.location
+                + " expected on of " + token.type.name() + "[" + StringUtils.join(expectedData, ", ") + "]");
     }
 }

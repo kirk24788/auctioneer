@@ -42,7 +42,15 @@ public abstract class GenericRestService {
         return (AuthenticatorVault) getAuthenticatorArmory(servletContext).vault;
     }
 
+    protected AuthenticatorVault getAlternativeAuthenticatorVault(final ServletContext servletContext) {
+        return (AuthenticatorVault) getAlternativeAuthenticatorArmory(servletContext).vault;
+    }
+
     protected AuthenticatorArmory getAuthenticatorArmory(final ServletContext servletContext) {
         return (AuthenticatorArmory) getApplicationContext(servletContext).getBean("armory");
+    }
+
+    protected AuthenticatorArmory getAlternativeAuthenticatorArmory(final ServletContext servletContext) {
+        return (AuthenticatorArmory) getApplicationContext(servletContext).getBean("alternativeArmory");
     }
 }

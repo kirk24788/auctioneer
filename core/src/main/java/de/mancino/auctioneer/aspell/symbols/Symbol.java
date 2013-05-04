@@ -10,6 +10,7 @@ import de.mancino.auctioneer.aspell.token.TokenType;
 import de.mancino.auctioneer.bo.ArmoryCharacterBO;
 import de.mancino.auctioneer.bo.ArmoryItemBO;
 import de.mancino.auctioneer.bo.FarmStrategyBO;
+import de.mancino.auctioneer.bo.PriceWatchBO;
 import de.mancino.auctioneer.bo.RealmStatusBO;
 import de.mancino.auctioneer.bo.SaleStrategyBO;
 import de.mancino.auctioneer.exceptions.ASpellParserException;
@@ -19,12 +20,13 @@ import de.mancino.auctioneer.exceptions.UnexpectedEndException;
 
 public abstract class Symbol {
     protected static final String NO_PREFIX = "";
-    protected static final String NO_DATA_MATCH = "";
+    protected static final String[] NO_DATA_MATCH = new String[]{""};
 
     private final ArmoryItemBO armoryItemBO;
     private final SaleStrategyBO saleStrategyBO;
     private final RealmStatusBO serverStatusBO;
     private final FarmStrategyBO farmStrategyBO;
+    private final PriceWatchBO priceWatchBO;
     private List<Token> tokenList;
     private final ArmoryCharacterBO armoryCharacterBO;
 
@@ -33,20 +35,22 @@ public abstract class Symbol {
             final SaleStrategyBO saleStrategyBO,
             final RealmStatusBO serverStatusBO,
             final FarmStrategyBO farmStrategyBO,
-            final ArmoryCharacterBO armoryCharacterBO) throws ASpellParserException {
+            final ArmoryCharacterBO armoryCharacterBO,
+            final PriceWatchBO priceWatchBO) throws ASpellParserException {
         this.tokenList = tokenList;
         this.armoryItemBO = armoryItemBO;
         this.saleStrategyBO = saleStrategyBO;
         this.serverStatusBO = serverStatusBO;
         this.farmStrategyBO = farmStrategyBO;
         this.armoryCharacterBO = armoryCharacterBO;
+        this.priceWatchBO = priceWatchBO;
         parse();
 
     }
 
     Symbol(final Symbol parent) throws ASpellParserException {
         this(parent.getTokenList(), parent.getArmoryItemBO(), parent.getSaleStrategyBO(),
-                parent.getServerStatusBO(), parent.getFarmStrategyBO(), parent.getArmoryCharacterBO());
+                parent.getServerStatusBO(), parent.getFarmStrategyBO(), parent.getArmoryCharacterBO(), parent.getPriceWatchBO());
     }
 
     protected ArmoryCharacterBO getArmoryCharacterBO() {
@@ -100,10 +104,11 @@ public abstract class Symbol {
     protected String expect(final TokenType tokenType) throws ASpellParserException {
         return expect(NO_PREFIX, tokenType, NO_DATA_MATCH);
     }
-    protected String expect(final TokenType tokenType, final String tokenData) throws ASpellParserException {
+
+    protected String expect(final TokenType tokenType, final String ... tokenData) throws ASpellParserException {
         return expect(NO_PREFIX, tokenType, tokenData);
     }
-    protected String expect(final String keywordPrefix, final TokenType tokenType, final String tokenData) throws ASpellParserException {
+    protected String expect(final String keywordPrefix, final TokenType tokenType, final String ... tokenData) throws ASpellParserException {
         // check if keyword needs to be prefixed
         if(keywordPrefix != NO_PREFIX) {
             final Token keywordToken = chomp();
@@ -120,7 +125,13 @@ public abstract class Symbol {
             throw new InvalidTokenException(nextToken, tokenType);
         }
         if(tokenData != NO_DATA_MATCH) {
-            if (!tokenData.equalsIgnoreCase(nextToken.data)) {
+            boolean matches = false;
+            for(final String possibleTokenData : tokenData) {
+                if(possibleTokenData.equalsIgnoreCase(nextToken.data)) {
+                    matches = true;
+                }
+            }
+            if (!matches) {
                 throw new InvalidTokenException(nextToken, tokenData);
             }
         }
@@ -165,8 +176,11 @@ public abstract class Symbol {
     protected RealmStatusBO getServerStatusBO() {
         return serverStatusBO;
     }
-    public FarmStrategyBO getFarmStrategyBO() {
+    protected FarmStrategyBO getFarmStrategyBO() {
         return farmStrategyBO;
+    }
+    protected PriceWatchBO getPriceWatchBO() {
+        return priceWatchBO;
     }
 
     public String execute() throws ASpellRuntimeError {

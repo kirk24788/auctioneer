@@ -27,6 +27,9 @@ public class ListCommand extends Symbol {
         case "CHARACTERS":
             listCommand = expect(ListCharactersCommand.class);
             break;
+        case "PRICES":
+            listCommand = expect(ListPricesCommand.class);
+            break;
         default:
             throw new IllegalStateException("Unsupported Category: " + category.getCategoryUpperCase());
         }

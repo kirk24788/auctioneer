@@ -15,6 +15,7 @@ import de.mancino.auctioneer.aspell.ASpell;
 import de.mancino.auctioneer.bo.ArmoryCharacterBO;
 import de.mancino.auctioneer.bo.ArmoryItemBO;
 import de.mancino.auctioneer.bo.FarmStrategyBO;
+import de.mancino.auctioneer.bo.PriceWatchBO;
 import de.mancino.auctioneer.bo.RealmStatusBO;
 import de.mancino.auctioneer.bo.SaleStrategyBO;
 
@@ -37,6 +38,8 @@ public class AdminConsolePage extends BasePage {
     private FarmStrategyBO farmStrategyBO;
     @SpringBean
     private ArmoryCharacterBO armoryCharacterBO;
+    @SpringBean
+    private PriceWatchBO priceWatchBO;
 
     /**
      * Logger instance of this class.
@@ -68,7 +71,7 @@ public class AdminConsolePage extends BasePage {
                     this.setEnabled(false);
                     LOG.info("Executing: {}", "" + consoleInput);
                     consoleOutput = ASpell.executeCommand("" + consoleInput,
-                            armoryItemBO, saleStrategyBO, serverStatusBO, farmStrategyBO, armoryCharacterBO);
+                            armoryItemBO, saleStrategyBO, serverStatusBO, farmStrategyBO, armoryCharacterBO, priceWatchBO);
                 } catch (Exception e) {
                     LOG.error(e.getMessage());
                     consoleOutput = e.getMessage() + "\n" + ExceptionUtils.getStackTrace(e);

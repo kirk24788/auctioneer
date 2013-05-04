@@ -7,6 +7,7 @@ import de.mancino.auctioneer.aspell.token.Token;
 import de.mancino.auctioneer.bo.ArmoryCharacterBO;
 import de.mancino.auctioneer.bo.ArmoryItemBO;
 import de.mancino.auctioneer.bo.FarmStrategyBO;
+import de.mancino.auctioneer.bo.PriceWatchBO;
 import de.mancino.auctioneer.bo.RealmStatusBO;
 import de.mancino.auctioneer.bo.SaleStrategyBO;
 import de.mancino.auctioneer.exceptions.ASpellParserException;
@@ -34,7 +35,7 @@ public class Parser {
 
     public static CommandList parse(final List<Token> tokenList, final ArmoryItemBO armoryItemBO,
             final SaleStrategyBO saleStrategyBO, final RealmStatusBO serverStatusBO, final FarmStrategyBO farmStrategyBO,
-            final ArmoryCharacterBO armoryCharacterBO) throws ASpellParserException {
-        return new CommandList(tokenList, armoryItemBO, saleStrategyBO, serverStatusBO, farmStrategyBO, armoryCharacterBO);
+            final ArmoryCharacterBO armoryCharacterBO, final PriceWatchBO priceWatchBo) throws ASpellParserException {
+        return new CommandList(tokenList, armoryItemBO, saleStrategyBO, serverStatusBO, farmStrategyBO, armoryCharacterBO, priceWatchBo);
     }
 }

@@ -17,6 +17,9 @@ public interface ArmoryCharacterBO extends Serializable {
     public void addCashSample(final CharacterId characterId, final Currency cash, final long timestamp);
     public ArmoryCharacter findByNameAndRealm(final CharacterName characterName, final RealmName realmName) throws ArmoryCharacterDoesnNotExistException;
     public List<ArmoryCharacter> listArmoryCharacters();
+    public List<ArmoryCharacter> listArmoryCharactersByName();
+    public List<ArmoryCharacter> listArmoryCharactersByLevel();
+    public List<ArmoryCharacter> listArmoryCharactersByItemLevel();
     public void deleteOldCashSamples(final long maxTimestamp);
     public ArmoryCharacter updateArmoryCharacter(final ArmoryCharacter armoryCharacter);
 }

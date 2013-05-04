@@ -52,6 +52,15 @@ http://www.springframework.org/schema/context/spring-context-2.5.xsd">
         <constructor-arg value="${authenticator.serial}" />
         <constructor-arg value="${authenticator.restorationcode}" />
     </bean>
+    
+    <bean id="alternativeArmory" class="de.mancino.armory.AuthenticatorArmory">
+        <constructor-arg value="${armory.alternative.user}" />
+        <constructor-arg value="${armory.alternative.password}" />
+        <constructor-arg value="${armory.alternative.char}" />
+        <constructor-arg value="${armory.alternative.realm}" />
+        <constructor-arg value="${authenticator.alternative.serial}" />
+        <constructor-arg value="${authenticator.alternative.restorationcode}" />
+    </bean>
     <bean id="updateCashLogTask" class="de.mancino.auctioneer.tasks.UpdateCashLogTask">
         <constructor-arg ref="armoryCharacterBO" />
         <constructor-arg ref="armory" />

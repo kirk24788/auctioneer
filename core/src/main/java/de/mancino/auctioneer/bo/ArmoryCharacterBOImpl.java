@@ -1,5 +1,8 @@
 package de.mancino.auctioneer.bo;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -84,6 +87,44 @@ public class ArmoryCharacterBOImpl implements ArmoryCharacterBO {
     @Override
     public ArmoryCharacter updateArmoryCharacter(ArmoryCharacter armoryCharacter) {
         return armoryCharacterDAO.update(armoryCharacter);
+    }
+
+    @Override
+    public List<ArmoryCharacter> listArmoryCharactersByName() {
+        List<ArmoryCharacter> sortList = new ArrayList<>(armoryCharacterDAO.getAll());
+        Collections.sort(sortList, new Comparator<ArmoryCharacter>() {
+            @Override
+            public int compare(ArmoryCharacter o1, ArmoryCharacter o2) {
+                String str1 = o1.getCharacterName().toString() + "-" + o1.getRealmName().toString();
+                String str2 = o2.getCharacterName().toString() + "-" + o2.getRealmName().toString();
+                return str1.compareTo(str2);
+            }
+        });
+        return Collections.unmodifiableList(sortList);
+    }
+
+    @Override
+    public List<ArmoryCharacter> listArmoryCharactersByLevel() {
+        List<ArmoryCharacter> sortList = new ArrayList<>(armoryCharacterDAO.getAll());
+        Collections.sort(sortList, new Comparator<ArmoryCharacter>() {
+            @Override
+            public int compare(ArmoryCharacter o1, ArmoryCharacter o2) {
+                return o2.getLevel() - o1.getLevel();
+            }
+        });
+        return Collections.unmodifiableList(sortList);
+    }
+
+    @Override
+    public List<ArmoryCharacter> listArmoryCharactersByItemLevel() {
+        List<ArmoryCharacter> sortList = new ArrayList<>(armoryCharacterDAO.getAll());
+        Collections.sort(sortList, new Comparator<ArmoryCharacter>() {
+            @Override
+            public int compare(ArmoryCharacter o1, ArmoryCharacter o2) {
+                return o2.getAverageItemLevel() - o1.getAverageItemLevel();
+            }
+        });
+        return Collections.unmodifiableList(sortList);
     }
 
 }

@@ -17,4 +17,10 @@ public class AuthenticatorService extends GenericRestService {
     public AuthenticatorToken getToken(@Context ServletContext servletContext) throws RequestException {
         return new AuthenticatorToken(getAuthenticatorVault(servletContext).getAuthenticatorToken());
     }
+    @GET
+    @Path("/alternative")
+    @Produces("application/xml")
+    public AuthenticatorToken getAlternativeToken(@Context ServletContext servletContext) throws RequestException {
+        return new AuthenticatorToken(getAlternativeAuthenticatorVault(servletContext).getAuthenticatorToken());
+    }
 }
