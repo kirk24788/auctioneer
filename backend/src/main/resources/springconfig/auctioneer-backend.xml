@@ -43,7 +43,7 @@ http://www.springframework.org/schema/context/spring-context-2.5.xsd">
     <bean id="errorLogBO" class="de.mancino.auctioneer.bo.ErrorLogBOImpl">
         <constructor-arg ref="errorLogDAO" />
     </bean>
-        
+    
     <bean id="armory" class="de.mancino.armory.AuthenticatorArmory">
         <constructor-arg value="${armory.user}" />
         <constructor-arg value="${armory.password}" />
@@ -58,6 +58,7 @@ http://www.springframework.org/schema/context/spring-context-2.5.xsd">
         <constructor-arg value="${armory.alternative.user}" />
         <constructor-arg value="${armory.alternative.password}" />
         <constructor-arg value="${armory.alternative.char}" />
+        <constructor-arg value="${armory.alternative.faction}" />
         <constructor-arg value="${armory.alternative.realm}" />
         <constructor-arg value="${authenticator.alternative.serial}" />
         <constructor-arg value="${authenticator.alternative.restorationcode}" />
