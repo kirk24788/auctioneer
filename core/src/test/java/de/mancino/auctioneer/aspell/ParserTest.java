@@ -33,7 +33,7 @@ public class ParserTest {
     public void smokeTestCreateFarming() throws ASpellParserException, ASpellLexerException {
         final String input = "CREATE FARMING \"Herbalism Basic Route\" ICON \"Golden Lotus\" YIELDS 44 * \"Green Tea Leaf\", 11 * \"Fool's Cap\", 95 * \"Silkweed\" ADD 112000;"
                 + "CREATE FARMING \"Mining Basic Route\" ICON \"Ghost Iron Ore\" YIELDS 256 * \"Ghost Iron Ore\", 2 * \"Black Trillium Ore\", 2 * \"White Trillium Ore\", 2 * \"Kyparite\";";
-        Parser.parse(Lexer.lex(input), armoryItemBO, null, null, null, null);
+        Parser.parse(Lexer.lex(input), armoryItemBO, null, null, null, null, null);
     }
 
     @Test
@@ -43,7 +43,7 @@ public class ParserTest {
                         "CREATE STRATEGY \"Ethereal Shard\" FROM 3 * \"Small Ethereal Shard\";" +
                         "CREATE STRATEGY \"Exotic Leather\" FROM 5 * \"Sha-Touched Leather\";";
 
-        Parser.parse(Lexer.lex(input), armoryItemBO, null, null, null, null);
+        Parser.parse(Lexer.lex(input), armoryItemBO, null, null, null, null, null);
     }
 
 
