@@ -9,6 +9,7 @@ import java.util.concurrent.TimeoutException;
 import de.mancino.armory.Armory;
 import de.mancino.armory.exceptions.RequestException;
 import de.mancino.armory.json.api.realm.Realm;
+import de.mancino.armory.json.vault.AuctionFaction;
 import de.mancino.prowl.Priority;
 import de.mancino.prowl.Prowl;
 
@@ -16,7 +17,7 @@ import de.mancino.prowl.Prowl;
 public class ServerStatus {
     private final static Prowl PROWL = new Prowl("d620d5f46e7b07f5486649dfdfc1ba6ad336a800");
     private final static String SERVERNAME = "Antonidas";
-    private final static Armory ARMORY = new Armory("mario@mancino-net.de", "-", "Loox", SERVERNAME);
+    private final static Armory ARMORY = new Armory("mario@mancino-net.de", "-", "Loox", AuctionFaction.ALLIANCE, SERVERNAME);
     private final static long SLEEP_INTERVAL = 1000;
     private final static long PRINT_INTERVAL = 15000;
     private final static long MAX_REQUEST_TIME = 1000;
@@ -25,10 +26,10 @@ public class ServerStatus {
     private static int TIMEOUT_FETCHES = 0;
     private static int INTERVAL_SUCCESSFUL_FETCHES = 0;
     private static int INTERVAL_TIMEOUT_FETCHES = 0;
-    
+
     /**
      * @param args
-     * @throws RequestException 
+     * @throws RequestException
      */
     public static void main(String[] args) {
         long startTime = System.currentTimeMillis();
@@ -61,6 +62,7 @@ public class ServerStatus {
         FutureTask<Boolean> future = new FutureTask<Boolean>(
                 new Callable<Boolean>()
                 {
+                    @Override
                     public Boolean call()
                     {
                         try {
