@@ -31,25 +31,30 @@ public abstract class Symbol {
     private final ArmoryCharacterBO armoryCharacterBO;
 
     Symbol(final List<Token> tokenList,
-            final ArmoryItemBO armoryItemBO,
-            final SaleStrategyBO saleStrategyBO,
-            final RealmStatusBO serverStatusBO,
-            final FarmStrategyBO farmStrategyBO,
-            final ArmoryCharacterBO armoryCharacterBO,
-            final PriceWatchBO priceWatchBO) throws ASpellParserException {
-        this.tokenList = tokenList;
-        this.armoryItemBO = armoryItemBO;
-        this.saleStrategyBO = saleStrategyBO;
-        this.serverStatusBO = serverStatusBO;
-        this.farmStrategyBO = farmStrategyBO;
-        this.armoryCharacterBO = armoryCharacterBO;
-        this.priceWatchBO = priceWatchBO;
-        parse();
+            final boolean parse,
+             final ArmoryItemBO armoryItemBO,
+             final SaleStrategyBO saleStrategyBO,
+             final RealmStatusBO serverStatusBO,
+             final FarmStrategyBO farmStrategyBO,
+             final ArmoryCharacterBO armoryCharacterBO,
+             final PriceWatchBO priceWatchBO) throws ASpellParserException {
+         this.tokenList = tokenList;
+         this.armoryItemBO = armoryItemBO;
+         this.saleStrategyBO = saleStrategyBO;
+         this.serverStatusBO = serverStatusBO;
+         this.farmStrategyBO = farmStrategyBO;
+         this.armoryCharacterBO = armoryCharacterBO;
+         this.priceWatchBO = priceWatchBO;
+         parse();
 
-    }
+     }
 
     Symbol(final Symbol parent) throws ASpellParserException {
-        this(parent.getTokenList(), parent.getArmoryItemBO(), parent.getSaleStrategyBO(),
+        this(parent, true);
+    }
+
+    Symbol(final Symbol parent, final boolean parse) throws ASpellParserException {
+        this(parent.getTokenList(), parse, parent.getArmoryItemBO(), parent.getSaleStrategyBO(),
                 parent.getServerStatusBO(), parent.getFarmStrategyBO(), parent.getArmoryCharacterBO(), parent.getPriceWatchBO());
     }
 

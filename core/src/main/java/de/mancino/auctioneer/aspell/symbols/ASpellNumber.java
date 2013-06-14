@@ -10,6 +10,12 @@ public class ASpellNumber extends Symbol {
         super(symbol);
     }
 
+
+    private ASpellNumber(Symbol symbol, long number) throws ASpellParserException {
+        super(symbol, false);
+        this.number = number;
+    }
+
     @Override
     protected void parse() throws ASpellParserException {
         number = Long.valueOf(expect(TokenType.NUMBER));
@@ -26,5 +32,10 @@ public class ASpellNumber extends Symbol {
             return (int) number;
         }
         // No negative numbers yet!
+    }
+
+    public static ASpellNumber createConstant(Symbol symbol, long number) throws ASpellParserException {
+        // TODO Auto-generated method stub
+        return new ASpellNumber(symbol, number);
     }
 }

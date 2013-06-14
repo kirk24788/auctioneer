@@ -20,7 +20,7 @@ public class CommandList extends Symbol {
             final SaleStrategyBO saleStrategyBO, final RealmStatusBO serverStatusBO,
             final FarmStrategyBO farmStrategyBO, final ArmoryCharacterBO armoryCharacterBO,
             final PriceWatchBO priceWatchBO) throws ASpellParserException {
-        super(tokenList, armoryItemBO, saleStrategyBO, serverStatusBO, farmStrategyBO, armoryCharacterBO, priceWatchBO);
+        super(tokenList, true, armoryItemBO, saleStrategyBO, serverStatusBO, farmStrategyBO, armoryCharacterBO, priceWatchBO);
     }
     CommandList(Symbol parent) throws ASpellParserException {
         super(parent);
