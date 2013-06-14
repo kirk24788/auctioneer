@@ -88,6 +88,7 @@ public class UpdateCashLogTask extends AuctioneerTask {
     private void changeCharacter(final ArmoryCharacter armoryCharacter)
             throws RequestException {
         armory.vault.changeActiveChar(armoryCharacter.getCharacterName().toString(),
+                armoryCharacter.getFaction(),
                 armoryCharacter.getRealmName().toString());
         try {
             Thread.sleep(1000);

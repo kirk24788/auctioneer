@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 
+import de.mancino.armory.json.vault.AuctionFaction;
 import de.mancino.auctioneer.dao.ArmoryCharacterDAO;
 import de.mancino.auctioneer.dao.CashSampleDAO;
 import de.mancino.auctioneer.dto.ArmoryCharacter;
@@ -44,11 +45,11 @@ public class ArmoryCharacterBOImpl implements ArmoryCharacterBO {
     }
 
     @Override
-    public ArmoryCharacter createArmoryCharacter(CharacterName characterName, RealmName realmName, Color color)
+    public ArmoryCharacter createArmoryCharacter(CharacterName characterName, AuctionFaction faction, RealmName realmName, Color color)
             throws ArmoryCharacterAlreadyExistingException {
         try {
             LOG.info("Creating Armory Character for: {}@{}", characterName, realmName);
-            final ArmoryCharacter armoryCharacter = new ArmoryCharacter(characterName, realmName, color);
+            final ArmoryCharacter armoryCharacter = new ArmoryCharacter(characterName, faction, realmName, color);
             armoryCharacterDAO.insert(armoryCharacter);
             return armoryCharacter;
         } catch (final DataIntegrityViolationException e) {

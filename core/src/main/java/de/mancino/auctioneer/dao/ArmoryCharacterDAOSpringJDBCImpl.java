@@ -17,6 +17,7 @@ import java.util.concurrent.ConcurrentMap;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcDaoSupport;
 
+import de.mancino.armory.json.vault.AuctionFaction;
 import de.mancino.auctioneer.ddl.InitDdl;
 import de.mancino.auctioneer.dto.ArmoryCharacter;
 import de.mancino.auctioneer.dto.CashSample;
@@ -83,6 +84,7 @@ public class ArmoryCharacterDAOSpringJDBCImpl extends SimpleJdbcDaoSupport imple
             ArmoryCharacter armoryCharacter = new ArmoryCharacterProxy(getJdbcTemplate(), new CharacterId(rs.getInt("id")));
             armoryCharacter.setId(new CharacterId(rs.getInt("id")));
             armoryCharacter.setCharacterName(new CharacterName(rs.getString("characterName")));
+            armoryCharacter.setFaction(AuctionFaction.valueOf(rs.getString("faction")));
             armoryCharacter.setRealmName(new RealmName(rs.getString("realmName")));
             armoryCharacter.setColor(new Color(rs.getString("color")));
             armoryCharacter.setBot(rs.getBoolean("bot"));
@@ -102,6 +104,7 @@ public class ArmoryCharacterDAOSpringJDBCImpl extends SimpleJdbcDaoSupport imple
                 table("armoryCharacter")
                     .dataTypes(integer("id").autoIncrement(),
                                varChar("characterName").size(50).notNull(),
+                               varChar("faction").size(10).notNull(),
                                varChar("realmName").size(50).notNull(),
                                varChar("color").size(6).notNull(),
                                integer("ilvl"),
@@ -116,8 +119,9 @@ public class ArmoryCharacterDAOSpringJDBCImpl extends SimpleJdbcDaoSupport imple
      */
     @Override
     public ArmoryCharacter insert(ArmoryCharacter armoryCharacter) {
-        getSimpleJdbcTemplate().update("INSERT INTO armoryCharacter (characterName, realmName, color, ilvl, ilvle, level, bot) VALUES (?,?,?,?,?,?,?)",
+        getSimpleJdbcTemplate().update("INSERT INTO armoryCharacter (characterName, faction, realmName, color, ilvl, ilvle, level, bot) VALUES (?,?,?,?,?,?,?)",
                 armoryCharacter.getCharacterName().toString(),
+                armoryCharacter.getFaction().name(),
                 armoryCharacter.getRealmName().toString(),
                 armoryCharacter.getColor().toString(),
                 armoryCharacter.getAverageItemLevel(),
@@ -132,8 +136,9 @@ public class ArmoryCharacterDAOSpringJDBCImpl extends SimpleJdbcDaoSupport imple
      */
     @Override
     public ArmoryCharacter update(ArmoryCharacter armoryCharacter) {
-        getSimpleJdbcTemplate().update("UPDATE armoryCharacter SET characterName=?, realmName=?, color=?, ilvl=?, ilvle=?, level=?, bot=? WHERE id=?",
+        getSimpleJdbcTemplate().update("UPDATE armoryCharacter SET characterName=?, faction=?, realmName=?, color=?, ilvl=?, ilvle=?, level=?, bot=? WHERE id=?",
                 armoryCharacter.getCharacterName().toString(),
+                armoryCharacter.getFaction().name(),
                 armoryCharacter.getRealmName().toString(),
                 armoryCharacter.getColor().toString(),
                 armoryCharacter.getAverageItemLevel(),
@@ -159,7 +164,7 @@ public class ArmoryCharacterDAOSpringJDBCImpl extends SimpleJdbcDaoSupport imple
      */
     @Override
     public ArmoryCharacter getByCharacterId(CharacterId characterId) {
-        return getSimpleJdbcTemplate().queryForObject("SELECT id, characterName, realmName, color, ilvl, ilvle, level, bot " +
+        return getSimpleJdbcTemplate().queryForObject("SELECT id, characterName, faction, realmName, color, ilvl, ilvle, level, bot " +
                 "FROM armoryCharacter WHERE id=?",
                 armoryCharacterMapper, characterId.toInt());
     }
@@ -169,7 +174,7 @@ public class ArmoryCharacterDAOSpringJDBCImpl extends SimpleJdbcDaoSupport imple
      */
     @Override
     public ArmoryCharacter getByCharacterNameAndRealm(final CharacterName characterName, final RealmName realmName) {
-        return getSimpleJdbcTemplate().queryForObject("SELECT id, characterName, realmName, color, ilvl, ilvle, level, bot " +
+        return getSimpleJdbcTemplate().queryForObject("SELECT id, characterName, faction, realmName, color, ilvl, ilvle, level, bot " +
                 "FROM armoryCharacter WHERE characterName=? AND realmName=?",
                 armoryCharacterMapper, characterName.toString(), realmName.toString());
     }
@@ -179,7 +184,7 @@ public class ArmoryCharacterDAOSpringJDBCImpl extends SimpleJdbcDaoSupport imple
      */
     @Override
     public List<ArmoryCharacter> getAll() {
-        return getSimpleJdbcTemplate().query("SELECT id, characterName, realmName, color, ilvl, ilvle, level, bot " +
+        return getSimpleJdbcTemplate().query("SELECT id, characterName, faction, realmName, color, ilvl, ilvle, level, bot " +
                 "FROM armoryCharacter ORDER BY characterName", armoryCharacterMapper);
     }
 

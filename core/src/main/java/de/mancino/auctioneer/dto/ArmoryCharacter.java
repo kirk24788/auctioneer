@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.mancino.armory.json.vault.AuctionFaction;
 import de.mancino.auctioneer.dto.components.CharacterId;
 import de.mancino.auctioneer.dto.components.CharacterName;
 import de.mancino.auctioneer.dto.components.Color;
@@ -17,6 +18,7 @@ public class ArmoryCharacter implements Serializable, Comparable<ArmoryCharacter
     private static final long serialVersionUID = 1L;
     private CharacterId id;
     private CharacterName characterName;
+    private AuctionFaction faction;
     private RealmName realmName;
     private List<CashSample> cashSamples;
     private Color color;
@@ -26,12 +28,13 @@ public class ArmoryCharacter implements Serializable, Comparable<ArmoryCharacter
     private int averageItemLevel;
 
     public ArmoryCharacter() {
-        this(null, null, null);
+        this(null, null, null, null);
     }
 
-    public ArmoryCharacter(final CharacterName characterName, final RealmName realmName, final Color color) {
+    public ArmoryCharacter(final CharacterName characterName, final AuctionFaction faction, final RealmName realmName, final Color color) {
         this.characterName = characterName;
         this.realmName = realmName;
+        this.faction = faction;
         this.cashSamples = new ArrayList<CashSample>();
         this.color = color;
     }
@@ -42,7 +45,7 @@ public class ArmoryCharacter implements Serializable, Comparable<ArmoryCharacter
     @Override
     public String toString() {
         if(characterName != null && realmName != null && id != null) {
-            return characterName + "@" + realmName + " (" + id.toInt() + ") " + " Level " + level + " iLvl " + averageItemLevelEquipped + "/" + averageItemLevel;
+            return characterName + "@" + realmName + " (" + id.toInt() + ") " + "Faction " + faction.key + " Level " + level + " iLvl " + averageItemLevelEquipped + "/" + averageItemLevel;
         } else {
             return "ArmoryCharacter<null>";
         }
@@ -150,5 +153,13 @@ public class ArmoryCharacter implements Serializable, Comparable<ArmoryCharacter
      */
     public void setLevel(int level) {
         this.level = level;
+    }
+
+    public void setFaction(AuctionFaction faction) {
+        this.faction = faction;
+    }
+
+    public AuctionFaction getFaction() {
+        return faction;
     }
 }
